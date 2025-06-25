@@ -50,13 +50,13 @@ where t.year = %s """
         cnx = DBConnect.get_connection()
         cursor = cnx.cursor(dictionary=True)
 
-        query = """select t.name, t.ID, sum(s.salary) as totale
-                    from lahmansbaseballdb.salaries s, lahmansbaseballdb.teams t, lahmansbaseballdb.appearances a
-                    where s.`year` = t.`year` and t.`year` = a.`year` 
-                    and a.`year` = %s
-                    and t.ID = a.teamID 
-                    and s.playerID = a.playerID 
-                    group by t.ID """
+        query = """select t.name, t.teamCode as ID, sum(s.salary) as totale
+            from lahmansbaseballdb.salaries s, lahmansbaseballdb.teams t, lahmansbaseballdb.appearances a
+            where s.`year` = t.`year` and t.`year` = a.`year` 
+            and a.`year` = %s
+            and t.ID = a.teamID 
+            and s.playerID = a.playerID 
+            group by t.teamCode, t.name """
 
         cursor.execute(query,(anno, ))
 

@@ -107,7 +107,15 @@ class Controller:
         self._view.update_page()  # Aggiorna la view una sola volta
 
     def handlePercorso(self, e):
-        pass
+        vertici, archi, pesoTot = self._model.getBestPath(self._teamSelected.ID)
+        self._view._txt_result.controls.clear()
+        self._view._txt_result.controls.append(
+             ft.Text(f"Dettagli cammino: vertici toccati {vertici}, archi:{archi}, pesototale: {pesoTot}")
+        )
+
+        self._view.update_page()  # Aggiorna la view una sola volta
+
+
 
 
 
